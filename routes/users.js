@@ -12,29 +12,29 @@ const services = require('../services/services');
 //const services = require ('../services/services.js');
 
 
-router.get('/', function (req, res) {
+router.get('/api/', function (req, res) {
     services.index(req, res);
 });
 
 //routes
 // Criação de um novo usuário
-router.post('/users', (req, res) => {
+router.post('/api/users', (req, res) => {
     services.cadUser(req, res);
 });
 
-router.get('/users', (req, res) => {
+router.get('/api/users', (req, res) => {
     services.listUsers(req, res);
 });
 
-router.get('/users/:codigo', (req, res) => {
+router.get('/api/users/:codigo', (req, res) => {
     services.getUserById(req, res);
 });
 
-router.put('/users/:codigo', (req, res) => {
+router.put('/api/users/:codigo', (req, res) => {
     services.updateUser(req, res);
 });
 
-router.delete('/users/:codigo', (req, res) => {
+router.delete('/api/users/:codigo', (req, res) => {
     services.deleteUser(req, res);
 });
 
