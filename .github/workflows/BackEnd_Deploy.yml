@@ -10,7 +10,7 @@ jobs:
     - name: Make git pull
       uses: appleboy/ssh-action@v1
       with:
-        host: "136.113.49.179"
+        host: "riboli.cloud"
         username: "eriboli@github"
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
