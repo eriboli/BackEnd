@@ -13,6 +13,7 @@ jobs:
         host: "riboli.cloud"
         username: "eriboli@github"
         key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: "22"
         script: |
           cd /projects/cad_users/BackEnd
           npm i
