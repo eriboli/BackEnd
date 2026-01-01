@@ -1,19 +1,19 @@
 name: Deploy to VPS
-on:
-  push:
-    branches: [ "main" ]
+
+on: [push]
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Make git pull
-      uses: appleboy/ssh-action@v1
+    - name: "Deploy to Server"
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: "riboli.cloud"
         username: "eriboli@github"
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /projects/cad_users/BackEnd
+          npm i
           git pull
           pm2 restart 0
