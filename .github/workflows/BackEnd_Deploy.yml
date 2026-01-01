@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    name: "Deploy to Server"
     runs-on: ubuntu-latest
     steps:
     - name: "Deploy to Server"
