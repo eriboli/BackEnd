@@ -34,4 +34,4 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           # Comando para rodar após o rsync:
           SCRIPT_AFTER: |
-            pm2 restart BackEnd || pm2 start /projects/cad_users/BackEnd/server.js --name "BackEnd"
+            pm2 reload BackEnd || pm2 start /projects/cad_users/BackEnd/server.js --name "BackEnd"
