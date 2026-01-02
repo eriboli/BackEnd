@@ -8,7 +8,7 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Install Node.js
       uses: actions/setup-node@v3
@@ -18,16 +18,13 @@ jobs:
     - name: Install npm dependencies
       run: npm install
     
-    # - name: Run build task
-    #   run: npm run build --if-present
-    
     - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
+      uses: burnett01/rsync-deployments@v8
       with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rlgoDzvc -i --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-          # EXCLUDE: "/dist/, /node_modules/"
+        switches: -avzr --delete
+        path: src/
+        remote_path: ${{ secrets.REMOTE_PATH }} # ex: /var/www/html/
+        remote_host: ${{ secrets.REMOTE_HOST }} # ex: example.com
+        remote_port: ${{ secrets.REMOTE_PORT }} # ex: 22
+        remote_user: ${{ secrets.REMOTE_USER }} # ex: ubuntu
+        remote_key: ${{ secrets.REMOTE_PRIVATE_KEY }}
