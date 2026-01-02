@@ -1,4 +1,4 @@
-name: Deploy to VPS
+name: BackEnd Deploy
 on:
   push:
     branches: [ "main" ]
@@ -29,7 +29,10 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i --delete"
           SOURCE: "./"
+          TARGET: "/projects/cad_users/BackEnd/"
+          #TARGET: ${{ secrets.REMOTE_TARGET }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-          # EXCLUDE: "/dist/, /node_modules/"
+          # Comando para rodar após o rsync:
+          SCRIPT_AFTER: |
+            pm2 restart BackEnd || pm2 start /projects/cad_users/BackEnd/server.js --name "BackEnd"
