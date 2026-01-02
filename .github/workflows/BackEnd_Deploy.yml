@@ -41,4 +41,4 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          pm2 restart BackEnd
+          pm2 reload BackEnd
