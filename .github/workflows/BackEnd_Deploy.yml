@@ -1,4 +1,4 @@
-name: Deploy to VPS
+name: BackEnd Deploy
 on:
   push:
     branches: [ "main" ]
@@ -33,5 +33,5 @@ jobs:
           #TARGET: ${{ secrets.REMOTE_TARGET }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          #SCRIPT_AFTER: |
-          #  pm2 restart 0
+          SCRIPT_AFTER: |
+            pm2 restart 0
