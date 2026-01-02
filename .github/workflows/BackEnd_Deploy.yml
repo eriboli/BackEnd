@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Test Variable
-      run: echo "O host remoto é " ${{ secrets.REMOTE_HOST }}
+      run: echo "O host remoto é ${{ secrets.REMOTE_HOST }}"
       
     - name: Checkout Repository
       uses: actions/checkout@v4
