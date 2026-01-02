@@ -2,19 +2,34 @@ name: Deploy to VPS
 on:
   push:
     branches: [ "main" ]
+
 jobs:
   deploy:
+
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Make git pull
-      uses: appleboy/ssh-action@v1
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
       with:
-        host: "136.113.49.179"
-        username: "eriboli"
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          cd /projects/cad_users/BackEnd
-          git pull
-          pm2 restart 0
+        node-version: '24.x'
+    
+    - name: Install npm dependencies
+      run: npm install
+    
+    # - name: Run build task
+    #   run: npm run build --if-present
+    
+    - name: Deploy to Server
+      uses: easingthemes/ssh-deploy@main
+      with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          # EXCLUDE: "/dist/, /node_modules/"
