@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Test Variable
-      run: echo "O host remoto é $REMOTE_HOST"
+      run: echo "O host remoto é " $REMOTE_HOST
       
     - name: Checkout Repository
       uses: actions/checkout@v4
